@@ -1,23 +1,34 @@
 // ARRAY OPERATIONS 
 class Solution {
     public static int arrayOperations(int n, int[] arr) {
-        int count=0,zero=0;
-        boolean isNonZero=false;
-        for(int i=0;i<n;i++){
-            if(arr[i]==0){
-                zero++;
-                if(isNonZero){
-                    count++;
-                    isNonZero=false;
-                }
-            }else{
-                isNonZero=true;
-            }
-        }
-        if(isNonZero){
-            count++;
-        }
-        if(zero==n) return 0;
-        return count>0?count:-1;
-    }
+
+		int nonZeroLastIndex = -1;
+		int prevZeroIndex = -1;
+		
+		int zeroesCount = 0;
+		int operations = 0;
+
+		for (int i = 0; i < arr.length; i++) {
+
+			if (arr[i] == 0) {
+				zeroesCount++;
+				
+				if (nonZeroLastIndex != -1 && prevZeroIndex != i - 1) {
+					operations++;
+				}
+				
+				prevZeroIndex = i;
+			} else {
+				nonZeroLastIndex = i;
+				if(i == n - 1)
+					operations++;
+					
+			}
+		}
+		if (zeroesCount == 0)
+			return -1;
+		else
+			return operations;
+
+	}
 }
