@@ -1,17 +1,22 @@
-// Task Scheduler
-class Solution {
-    static int leastInterval(int N, int K, char tasks[]) {
-     int freq[] = new int[26];
-        for (int i = 0; i < N; i++) {
-            freq[tasks[i] - 'A']++;
+// Prefix match with other strings
+class Solution
+{
+    public int klengthpref(String[] arr, int n, int k, String str)
+    {
+        // code here
+      int c=0;
+        if(k>str.length())
+            return 0;
+        else{
+            String r = str.substring(0,k);
+         //   System.out.println("r== "+r);
+            for(int i=0; i<n; i++){
+           //     System.out.println(arr[i].substring(0,k));
+                if(arr[i].length()>=k && arr[i].substring(0,k).equals(r)){
+                    c++;
+                }
+            }
         }
-        Arrays.sort(freq);
-        int maxFreq = freq[25];
-        int idleTime = (maxFreq - 1) * K;
-        for (int i = 24; i >= 0; i--) {
-            idleTime -= Math.min(maxFreq - 1, freq[i]);
-        }
-        idleTime = Math.max(0, idleTime);
-        return idleTime + N;
+        return c;
     }
 }
